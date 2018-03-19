@@ -1,0 +1,1 @@
+// Główny moduł sterujący 
