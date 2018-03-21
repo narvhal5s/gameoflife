@@ -13,4 +13,4 @@ commandtest: game
 	./game 25 25 150 f gif 13
 
 memorytest: game
-	valgrind ./game 25 25 150 f gif 13
+	valgrind -v ./game config.txt
