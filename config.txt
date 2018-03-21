@@ -1,0 +1,6 @@
+Reguły automatu: 234/3
+Długość planszy: 25
+Szerokość planszy: 25
+Ilość generacji: 100
+Procent żywych komórek || nazwa pliku png || nazwa pliku txt: Jesli brak to 25%
+Format zapisu: txt
