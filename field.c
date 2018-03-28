@@ -1,23 +1,24 @@
-//Moduł tworzący pole i wczytujacy dane
 
 #include "field.h"
 
 
-int field_control( int width , int height , char *load_type , char *load_detail ){
+Cell *** field_control( int width , int height , char *load_type , char *load_detail ){
 	
 	Cell ***field = make_field( width , height );
 
-	clear_field( field , width , height );
+	field = read_from_txt( field , width , height , load_detail);
 	
-	return 0;
+	return field ; 
 
 }
 
 Cell *** make_field( int width , int height ){
+	//Zarezerwowanie miejsca na wskazniki do odpowiednich komorek
 	Cell ***field = malloc(width * sizeof(**field));
 	for(int i=0 ; i< width ; i++)
 		field[i] = malloc(height * sizeof(*field));
 	
+	//Zarezerwownie miejsca dla poszczegolnych komorek pola
 	for(int i=0 ; i< width ; i++)
 		for(int j=0 ; j< height ; j++)
 			field[i][j] = (Cell*)malloc(sizeof(Cell));
@@ -27,13 +28,28 @@ Cell *** make_field( int width , int height ){
 
 
 Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_detail){
-	FILE *txt_file = fopen("load_detail" , "r");
+	FILE *txt_file = fopen( load_detail , "r" );
 	if(txt_file == NULL){
-		printf("Ni udalo sie otworzyc pliku %s zawierajacego generacje" , load_detail ) ;
-		return 1; 
+		printf("Nie udalo sie otworzyc pliku %s zawierajacego generacje" , load_detail ) ;
 	}
-	
-
+	char c = 'c';
+	int i = 0 , j = 0 ;
+	while( c != EOF ){
+		c = fgetc( txt_file ) ;
+		if(c == '1' || c == '0'){
+			field[i][j]->state = c - '0' ;
+			j++;
+		}
+		else if( c ==  ' ' );
+		else if( c == '\n' ){
+			i++;
+			j = 0;
+		}
+		else{
+			break;
+		}
+	}
+	return field ; 
 }
 
 Cell *** read_from_png ( Cell *** field , int width , int height , char *load_detail){
@@ -47,6 +63,8 @@ Cell *** fill_random ( Cell *** field , int width , int height , char *load_deta
 
 int clear_field(Cell ***field , int width , int height){
 	
+	//Zwolnienie pamieci odwrotnie do jej zarezerwowania
+
 	for(int i=0 ; i< width ; i++)
 		for(int j=0 ; j< height ; j++)
 			free(field[i][j]) ;
@@ -56,5 +74,4 @@ int clear_field(Cell ***field , int width , int height){
 
 	free(field) ;
 
-	return 0 ;  
 } 

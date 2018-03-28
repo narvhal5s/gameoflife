@@ -4,10 +4,7 @@
 //Nastepnie bedzie wywoływał kolejne moduly
 
 #include "field.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include "save.h"
 
 int main( int argc, char **argv){
 
@@ -149,7 +146,9 @@ int main( int argc, char **argv){
 	for( i++ , j=0 ; i<strlen(rules) ; i++ , j++)
 		born[j] = rules[i] - '0';	
 	
-	field_control( width , height , load_type , load_detail ) ;
+	Cell ***field = field_control( width , height , load_type , load_detail );
+	save_to_txt( field , height , width ) ;
+	clear_field( field , height , width ) ;
 	free(live);
 	free(born);
 	return 0;
