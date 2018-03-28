@@ -3,9 +3,11 @@
 //Jego podstawowym zadaniem jest wczytanie danych konfiguracyjnych
 //Nastepnie bedzie wywoływał kolejne moduly
 
+#include "field.h"
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+
 
 int main( int argc, char **argv){
 
@@ -147,7 +149,9 @@ int main( int argc, char **argv){
 	for( i++ , j=0 ; i<strlen(rules) ; i++ , j++)
 		born[j] = rules[i] - '0';	
 	
-	
+	field_control( width , height , load_type , load_detail ) ;
+	free(live);
+	free(born);
 	return 0;
 
 }
