@@ -3,10 +3,20 @@
 
 
 Cell *** field_control( int width , int height , char *load_type , char *load_detail ){
-	
+
+	//Inicjalizacja pola gry 	
 	Cell ***field = make_field( width , height );
 
-	field = fill_random( field , width , height , load_detail);
+	//W zaleznosci od parametru load_type wywolane zostana rozne funkcje
+	
+	if(strcmp(load_type , "txt") == 0)
+		field = read_from_txt( field , width , height , load_detail);
+	
+	if(strcmp(load_type , "random") == 0)
+		field = fill_random( field , width , height , load_detail);
+	
+	if(strcmp(load_type , "png") == 0)
+		field = read_from_png( field , width , height , load_detail);
 	
 	return field ; 
 
@@ -28,12 +38,16 @@ Cell *** make_field( int width , int height ){
 
 
 Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_detail){
+	
+	//Otwarcie pliku do wczytania, bez weryfikacji poprawnosci, zostala ona wykonan w module main
 	FILE *txt_file = fopen( load_detail , "r" );
-	if(txt_file == NULL){
-		printf("Nie udalo sie otworzyc pliku %s zawierajacego generacje" , load_detail ) ;
-	}
+	
+	//Zmienne potrzebne do wczytywania
 	char c = 'c';
 	int i = 0 , j = 0 ;
+	
+	//Petla while wczytuje az do konca pliku 
+//Rozbuduj obsluge bledow
 	while( c != EOF ){
 		c = fgetc( txt_file ) ;
 		if(c == '1' || c == '0'){
@@ -41,6 +55,7 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 			j++;
 		}
 		else if( c ==  ' ' );
+		else if( c ==  '\t' );
 		else if( c == '\n' ){
 			i++;
 			j = 0;
@@ -48,23 +63,36 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 		else{
 			break;
 		}
+
+		if( j >= height || i >= width ){
+			printf("Bledne dane w pliku %s , prosze zweryfikowac" , load_detail);
+			break;
 	}
+	
 	fclose(txt_file);
+
 	return field ; 
 }
 
 Cell *** read_from_png ( Cell *** field , int width , int height , char *load_detail){
 
+//Tu kiedys nastapi integracja z pnglib
+
 }
 
 Cell *** fill_random ( Cell *** field , int width , int height , char *load_detail){
+	
+	//Zmienn do losowej generacji
 	time_t tt;
 	srand(time(&tt));
 	int random_variable;
+
+	//Generacji losowa, odchylenie w zaleznosci od wielkosci pola gry 
+	//Mimo nie najwiekszej precyzji dziala sprawnie jest prost i daje wymierne wyniki	
 	for(int i=0 ; i< width ; i++){
 		for(int j=0 ; j < height ; j++){
-			random_variable = rand()%101;
-			if(random_variable <= atoi(load_detail) - 1)
+			random_variable = rand()%100 + 1;
+			if(random_variable <= atoi(load_detail))
 				field[i][j]->state = 1 ;
 			else
 				field[i][j]->state = 0 ;
@@ -77,7 +105,7 @@ Cell *** fill_random ( Cell *** field , int width , int height , char *load_deta
 
 int clear_field(Cell ***field , int width , int height){
 	
-	//Zwolnienie pamieci odwrotnie do jej zarezerwowania
+	//Zwolnienie pamieci w kolejnosci odwrotnej do rezerwowania
 
 	for(int i=0 ; i< width ; i++)
 		for(int j=0 ; j< height ; j++)

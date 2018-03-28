@@ -7,5 +7,6 @@
 #include "field.h"
 
 int save_to_txt( Cell ***field , int width , int height );
-
+int save_to_png( Cell ***field , int width , int height );
+int make_gif(int gen_counter); //Liczba generacji jest potrzebna bo tyle bedzie PNG
 #endif

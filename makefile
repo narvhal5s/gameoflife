@@ -16,13 +16,13 @@ filetest: game
 	./game config.txt
 
 commandtest: game
-	./game 100 100 150 random 10  gif 13/5
+	./game 100 100 150 random 50  gif 13/5
 
 commandtesterror: game
 	./game 500 699 0 txa lak.png gidA 9a/1
 
 memorytest: game
-	valgrind -v ./game 25 25 150 random 44  gif 13/5
+	valgrind -v ./game 100 100 150 random 44  gif 13/5
 
 txttest: game
 	./game 5 5 150 txt matrix.txt  gif 23/3
