@@ -26,5 +26,8 @@ memorytest: game
 
 txttest: game
 	./game 5 5 150 txt matrix.txt  gif 23/3
+
 memorytxttest: game
 	valgrind -v  ./game 5 5 150 txt matrix.txt  gif 23/3
+clear: 
+	@rm *.o 

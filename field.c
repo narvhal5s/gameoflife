@@ -64,9 +64,6 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 			break;
 		}
 
-		if( j >= height || i >= width ){
-			printf("Bledne dane w pliku %s , prosze zweryfikowac" , load_detail);
-			break;
 	}
 	
 	fclose(txt_file);
