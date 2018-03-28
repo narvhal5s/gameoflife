@@ -6,7 +6,7 @@ Cell *** field_control( int width , int height , char *load_type , char *load_de
 	
 	Cell ***field = make_field( width , height );
 
-	field = read_from_txt( field , width , height , load_detail);
+	field = fill_random( field , width , height , load_detail);
 	
 	return field ; 
 
@@ -49,6 +49,7 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 			break;
 		}
 	}
+	fclose(txt_file);
 	return field ; 
 }
 
@@ -57,7 +58,20 @@ Cell *** read_from_png ( Cell *** field , int width , int height , char *load_de
 }
 
 Cell *** fill_random ( Cell *** field , int width , int height , char *load_detail){
+	time_t tt;
+	srand(time(&tt));
+	int random_variable;
+	for(int i=0 ; i< width ; i++){
+		for(int j=0 ; j < height ; j++){
+			random_variable = rand()%101;
+			if(random_variable <= atoi(load_detail) - 1)
+				field[i][j]->state = 1 ;
+			else
+				field[i][j]->state = 0 ;
+		}
+	}
 
+	return field;
 }
 
 

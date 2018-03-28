@@ -93,6 +93,7 @@ int main( int argc, char **argv){
 			load_type == "random" ;
 			load_detail == "25" ; 
 		}
+		fclose(input);
 	}
 	else if( strcmp(load_type , "random") == 0 && atoi(load_detail) <100 && atoi(load_detail) > 0 ){
 		printf("Wczytano random genracji %s\n" , load_detail);
@@ -145,10 +146,14 @@ int main( int argc, char **argv){
 	int j;	
 	for( i++ , j=0 ; i<strlen(rules) ; i++ , j++)
 		born[j] = rules[i] - '0';	
-	
+	// Tutaj dzieja sie male testy i inne dziwne rzeczy 
 	Cell ***field = field_control( width , height , load_type , load_detail );
 	save_to_txt( field , height , width ) ;
 	clear_field( field , height , width ) ;
+	
+
+
+
 	free(live);
 	free(born);
 	return 0;
