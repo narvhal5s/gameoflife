@@ -17,3 +17,11 @@ int save_to_txt(Cell ***field , int width , int height){
 	fclose(out);
 	return 0;
 }
+
+int save_to_png(Cell ***field, int width , int height , int gen_number){
+	FILE *out = fopen("result.png_" , "w") ;
+	if(out == NULL){
+		printf("Nie udalo sie utworzyc pliku wynikowego") ; 
+		return 1;
+	}
+}

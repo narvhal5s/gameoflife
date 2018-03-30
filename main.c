@@ -4,7 +4,7 @@
 //Nastepnie bedzie wywoływał kolejne moduly
 
 #include "field.h"
-#include "save.h"
+#include "game.h" 
 
 int main( int argc, char **argv){
 
@@ -40,7 +40,7 @@ int main( int argc, char **argv){
 			gen_counter = atoi(fgets(buffor , 50 , config)) ;
 			
 			//Tutaj jest niedobrze, ale kiedy bedzie dobrze
-
+			//Albo nie bedzie wgl nic i chuj
 			/*load_type = fgets( buffor , 50 , config) ;
 			load_detail = fgets( buffor , 50 , congif) ;
 			save_to = fgets( buffor , 50 , config );
@@ -151,9 +151,8 @@ int main( int argc, char **argv){
 	Cell ***field = field_control( width , height , load_type , load_detail );
 	
 	// Tutaj dzieja sie male testy i inne dziwne rzeczy 
-	save_to_txt( field , height , width ) ;
-	
-
+	printf("WYnik%d\n" , play_game( field , height , width , born , live , save_to , gen_counter));	
+	save_to_txt( field , width , height ) ;
 
 	//Finalizacja programu , sprzatanie
 	clear_field( field , height , width ) ;

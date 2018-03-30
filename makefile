@@ -1,16 +1,19 @@
 
 
-game: main.o field.o save.o
-	$(CC) main.o field.o save.o -o game
-
-main.o: main.c field.h save.h
-	$(CC) main.c -c
+game: main.o field.o save.o game.o
+	@$(CC) main.o field.o save.o game.o -o game
+	@rm *.o
+main.o: main.c field.h game.h
+	@$(CC) main.c -c
 
 field.o: field.c field.h 
-	$(CC) field.c -c
+	@$(CC) field.c -c
 
 save.o: save.c save.h field.h
-	$(CC) save.c -c
+	@$(CC) save.c -c
+
+game.o: game.c game.h save.h field.h
+	@$(CC) game.c -c
 
 filetest: game
 	./game config.txt
@@ -29,5 +32,4 @@ txttest: game
 
 memorytxttest: game
 	valgrind -v  ./game 5 5 150 txt matrix.txt  gif 23/3
-clear: 
-	@rm *.o 
+
