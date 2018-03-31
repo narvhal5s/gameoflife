@@ -2,9 +2,17 @@
 #include "game.h"
 
 int play_game( Cell ***field , int width , int height , int *live ,int live_counter , int *born , int born_counter ,char *save_to , int gen_counter){
+
+
 	field = count_neighbours( field , width, height ) ;
+
+
 	field = change_state ( field ,  width , height , live , live_counter , born , born_counter) ;
+
+
 	save_to_txt( field , width , height) ;	
+
+
 	return 0;
 }
 
