@@ -150,9 +150,7 @@ int main( int argc, char **argv){
 	//Wywolanie modulu field
 	Cell ***field = field_control( width , height , load_type , load_detail );
 	
-	// Tutaj dzieja sie male testy i inne dziwne rzeczy 
-	printf("WYnik%d\n" , play_game( field , height , width , born , live , save_to , gen_counter));	
-	save_to_txt( field , width , height ) ;
+	play_game( field , height , width , born , live , save_to , gen_counter);	
 
 	//Finalizacja programu , sprzatanie
 	clear_field( field , height , width ) ;

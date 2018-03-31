@@ -52,6 +52,7 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 		c = fgetc( txt_file ) ;
 		if(c == '1' || c == '0'){
 			field[i][j]->state = c - '0' ;
+			field[i][j]->neighbours = 0 ;
 			j++;
 		}
 		else if( c ==  ' ' );

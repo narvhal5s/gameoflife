@@ -10,7 +10,7 @@ int save_to_txt(Cell ***field , int width , int height){
 	}
 	for(int i = 0 ; i < width ; i++){
 		for(int j = 0 ; j < height ; j++){
-			fprintf(out , "%d " , field[i][j]->state);
+			fprintf(out , "%d %d\t" , field[i][j]->state , field[i][j]->neighbours);
 		}
 		fprintf(out , "\n");
 	}

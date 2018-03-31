@@ -25,11 +25,11 @@ commandtesterror: game
 	./game 500 699 0 txa lak.png gidA 9a/1
 
 memorytest: game
-	valgrind -v ./game 100 100 150 random 44  gif 13/5
+	valgrind -v ./game 10 10 150 random 44  gif 13/5
 
 txttest: game
-	./game 5 5 150 txt matrix.txt  gif 23/3
+	./game 6 6 150 txt matrix.txt  gif 23/3
 
 memorytxttest: game
-	valgrind -v  ./game 5 5 150 txt matrix.txt  gif 23/3
+	valgrind -v  ./game 6 6 150 txt matrix.txt  gif 23/3
 
