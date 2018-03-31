@@ -138,7 +138,8 @@ int main( int argc, char **argv){
 		live_counter++;
 	
 	int *live = (int*)malloc( live_counter * sizeof(int)) ;
-	int *born = (int*)malloc( ( strlen(rules) - live_counter -1 ) * sizeof(int)) ; 
+	int born_counter = strlen(rules) - live_counter -1 ;
+	int *born = (int*)malloc( born_counter * sizeof(int)) ; 
 	
 	for( i = 0; rules[i] != '/' ; i++ )
 		live[i] = rules[i] - '0';
@@ -150,7 +151,7 @@ int main( int argc, char **argv){
 	//Wywolanie modulu field
 	Cell ***field = field_control( width , height , load_type , load_detail );
 	
-	play_game( field , height , width , born , live , save_to , gen_counter);	
+	play_game( field , height , width , live , live_counter , born , born_counter , save_to , gen_counter);	
 
 	//Finalizacja programu , sprzatanie
 	clear_field( field , height , width ) ;
