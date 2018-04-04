@@ -20,7 +20,7 @@ Cell *** make_field(int width , int height );
 
 //Funkcja zwalnia pamiec zaalokowana na stworzenie pola 
 //Wzkaznik ***field zwroci NULL jesli wszystko zostanie prawidlowo zwolnione
-int clear_field ( Cell ***field , int width , int height );
+Cell *** clear_field ( Cell ***field , int width , int height );
 
 //Funkcje wczytujaca dane na pole gry , odpowiednio z pliku tekstowego obraz png i losowe 
 Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_detail); 

@@ -90,8 +90,8 @@ int main( int argc, char **argv){
 		input = fopen(load_detail , "r");
 		if( input == NULL){
 			printf("Nie udalo sie otworzyc pliku %s, uzyty zostanie losowe wypelnienie planszy\n" , load_detail ) ;
-			load_type == "random" ;
-			load_detail == "25" ; 
+			 load_type = "random" ;
+			 load_detail = "25" ; 
 		}
 		fclose(input);
 	}
@@ -110,7 +110,7 @@ int main( int argc, char **argv){
 	// Nastepuje rowniez przepisanie go na dwie tablice live i born
 	// live zawiera liczbe sasiadow dla ktorej komorka zostaje zywa
 	// born zawiera liczbe sasiadow dla ktorej komorka rodzi sie
-	// Te dwie tablice zostana przekazane do modulu GAME zamiast lanucha rules, co stanowi zmiane wzgledem specyfikacji implementacyjnej
+	// Te dwie tablice zostana przekazane do modulu GAME zamiast lancucha rules, co stanowi zmiane wzgledem specyfikacji implementacyjnej
 	
 	int rules_check = 0 ;
 	int live_counter = 0 ;
@@ -151,10 +151,10 @@ int main( int argc, char **argv){
 	//Wywolanie modulu field
 	Cell ***field = field_control( width , height , load_type , load_detail );
 	
-	play_game( field , height , width , live , live_counter , born , born_counter , save_to , gen_counter);	
+	play_game( field , width , height  , live , live_counter , born , born_counter , save_to , gen_counter);	
 
 	//Finalizacja programu , sprzatanie
-	clear_field( field , height , width ) ;
+	field = clear_field( field , width , height ) ;
 	free(live);
 	free(born);
 	return 0;

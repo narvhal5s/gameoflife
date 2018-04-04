@@ -5,6 +5,7 @@
 Cell *** field_control( int width , int height , char *load_type , char *load_detail ){
 
 	//Inicjalizacja pola gry 	
+	
 	Cell ***field = make_field( width , height );
 
 	//W zaleznosci od parametru load_type wywolane zostana rozne funkcje
@@ -12,10 +13,10 @@ Cell *** field_control( int width , int height , char *load_type , char *load_de
 	if(strcmp(load_type , "txt") == 0)
 		field = read_from_txt( field , width , height , load_detail);
 	
-	if(strcmp(load_type , "random") == 0)
+	else if(strcmp(load_type , "random") == 0)
 		field = fill_random( field , width , height , load_detail);
 	
-	if(strcmp(load_type , "png") == 0)
+	else if(strcmp(load_type , "png") == 0)
 		field = read_from_png( field , width , height , load_detail);
 	
 	return field ; 
@@ -23,12 +24,16 @@ Cell *** field_control( int width , int height , char *load_type , char *load_de
 }
 
 Cell *** make_field( int width , int height ){
+	
 	//Zarezerwowanie miejsca na wskazniki do odpowiednich komorek
+	
 	Cell ***field = malloc(width * sizeof(**field));
+	
 	for(int i=0 ; i< width ; i++)
 		field[i] = malloc(height * sizeof(*field));
 	
 	//Zarezerwownie miejsca dla poszczegolnych komorek pola
+	
 	for(int i=0 ; i< width ; i++)
 		for(int j=0 ; j< height ; j++)
 			field[i][j] = (Cell*)malloc(sizeof(Cell));
@@ -40,14 +45,16 @@ Cell *** make_field( int width , int height ){
 Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_detail){
 	
 	//Otwarcie pliku do wczytania, bez weryfikacji poprawnosci, zostala ona wykonan w module main
+	
 	FILE *txt_file = fopen( load_detail , "r" );
 	
 	//Zmienne potrzebne do wczytywania
-	char c = 'c';
+	
+	char c ;
 	int i = 0 , j = 0 ;
 	
 	//Petla while wczytuje az do konca pliku 
-//Rozbuduj obsluge bledow
+	
 	while( c != EOF ){
 		c = fgetc( txt_file ) ;
 		if(c == '1' || c == '0'){
@@ -57,11 +64,13 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 		}
 		else if( c ==  ' ' );
 		else if( c ==  '\t' );
+		else if( c ==  EOF );
 		else if( c == '\n' ){
 			i++;
 			j = 0;
 		}
 		else{
+			printf("Napotkano niezanany znak w pliku %s\n " , load_detail ) ;
 			break;
 		}
 
@@ -74,23 +83,25 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 
 Cell *** read_from_png ( Cell *** field , int width , int height , char *load_detail){
 
-//Tu kiedys nastapi integracja z pnglib
-
+	return field;
 }
 
 Cell *** fill_random ( Cell *** field , int width , int height , char *load_detail){
 	
 	//Zmienn do losowej generacji
+	
 	time_t tt;
-	srand(time(&tt));
-	int random_variable;
 
+	srand(time(&tt));
+
+	int percent = atoi(load_detail);
+	
 	//Generacji losowa, odchylenie w zaleznosci od wielkosci pola gry 
-	//Mimo nie najwiekszej precyzji dziala sprawnie jest prost i daje wymierne wyniki	
-	for(int i=0 ; i< width ; i++){
+	//Mimo nie najwiekszej precyzji dziala sprawnie i jest prost 	
+	
+	for(int i=0 ; i < width ; i++){
 		for(int j=0 ; j < height ; j++){
-			random_variable = rand()%100 + 1;
-			if(random_variable <= atoi(load_detail))
+			if( rand()%101 < percent )
 				field[i][j]->state = 1 ;
 			else
 				field[i][j]->state = 0 ;
@@ -101,7 +112,7 @@ Cell *** fill_random ( Cell *** field , int width , int height , char *load_deta
 }
 
 
-int clear_field(Cell ***field , int width , int height){
+Cell *** clear_field(Cell ***field , int width , int height){
 	
 	//Zwolnienie pamieci w kolejnosci odwrotnej do rezerwowania
 
@@ -114,4 +125,7 @@ int clear_field(Cell ***field , int width , int height){
 
 	free(field) ;
 
+	field = NULL ; 
+
+	return field ;
 } 

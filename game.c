@@ -31,7 +31,6 @@ Cell *** count_neighbours( Cell ***field , int width , int height ){
 						x = width - 1;
 					if(l == -1)
 						y = height - 1;
-
 					if(k == width) 
 						x = 0 ;
 					if(l == height)
