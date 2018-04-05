@@ -38,6 +38,13 @@ Cell *** make_field( int width , int height ){
 		for(int j=0 ; j< height ; j++)
 			field[i][j] = (Cell*)malloc(sizeof(Cell));
 			
+	for(int i=0 ; i < width ; i++){
+		for(int j=0 ; j < height ; j++){
+				field[i][j]->state = 0 ;
+				field[i][j]->neighbours = 0 ;
+		}
+	}
+	
 	return field;
 }
 
