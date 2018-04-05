@@ -3,8 +3,8 @@
 //Jego podstawowym zadaniem jest wczytanie danych konfiguracyjnych
 //Nastepnie bedzie wywoływał kolejne moduly
 
-#include "field.h"
-#include "game.h" 
+#include "field/field.h"
+#include "game/game.h" 
 
 int main( int argc, char **argv){
 

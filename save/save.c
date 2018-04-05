@@ -30,5 +30,8 @@ int save_to_png(Cell ***field, int width , int height , int gen_number){
 	}
 
 
+
+
+	
 	return 0 ;
 }

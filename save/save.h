@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <png.h> 
-#include "field.h"
+#include <png.h>
+#include <zlib.h>
+#include "../field/field.h"
 
 int save_to_txt( Cell ***field , int width , int height );
 int save_to_png( Cell ***field , int width , int height , int gen_number );
