@@ -6,6 +6,8 @@
 #include "field/field.h"
 #include "game/game.h" 
 
+//char *config_load( char *line , char *looking_for); // Mala funkcja zalaczona do main ktora posluzy do wyluskania danych z pliku konfiguracyjnego
+
 int main( int argc, char **argv){
 
 	//deklaracja parametrow ktore zostana wczytane
@@ -33,20 +35,16 @@ int main( int argc, char **argv){
 			rules = "23/3";
 		}
 		else{
-			printf("Otwarto plik konfiguracyjny %s , rozpocznam wczytywanie parametrow\n" , argv[1]);
-			char buffor[50];
-			width = atoi(fgets( buffor , 50 , config)) ;
-			height = atoi(fgets( buffor , 50 , config)) ;
-			gen_counter = atoi(fgets(buffor , 50 , config)) ;
-			
-			//Tutaj jest niedobrze, ale kiedy bedzie dobrze
-			//Albo nie bedzie wgl nic i chuj
-			/*load_type = fgets( buffor , 50 , config) ;
-			load_detail = fgets( buffor , 50 , congif) ;
-			save_to = fgets( buffor , 50 , config );
-			rules = fgets( buffor , 50 , config) ;*/
+			/*printf("Otwarto plik konfiguracyjny %s , rozpocznam wczytywanie parametrow\n" , argv[1]);
+			width = 
+			height = 
+			gen_counter = 
+			load_type =
+			load_detail = 
+			save_to =
+			rules =*/
+			fclose(config);
 		}
-		fclose(config);
 	}
 
 	//Jeżeli podano wiecej argumetnow to program interpretuje je jako parametry konfiguracyjne podane w odpowiedniej kolejnosci
@@ -132,7 +130,7 @@ int main( int argc, char **argv){
 	}
 	
 	//Dane rules zostana wczytane do dwoch tablic lokowanych dynamicznych 
-	//W tym celu obliczono ilosc sasidow dla ktorzych komorka przezywa live_counter 	
+	//W tym celu obliczono ilosc sasidow dla ktorych komorka przezywa live_counter i born_counter dla ilu sie rodzi
 
 	for( i = 0 ; rules[i] != '/' ; i++)
 		live_counter++;

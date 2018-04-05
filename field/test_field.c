@@ -15,7 +15,7 @@
 
 int main( int argc , char *argv ){
 
-	//Zainjcowanie pola
+	//Zainicjowanie pola
 	Cell *** field = field_control( WIDTH , HEIGHT , LOAD_TYPE , LOAD_DETAIL ) ;
 	
 	//Wudruk na ekran konsoli
@@ -40,6 +40,8 @@ int main( int argc , char *argv ){
 
 	printf("Stanowi to %.2f procent wszystkich komorek\n" , (float)live_cell_counter/(WIDTH * HEIGHT)*100 );
 
+
+	//Czyszczenie pamieci
 	field = clear_field( field , WIDTH , HEIGHT ) ; 
 
 	if(field == NULL){

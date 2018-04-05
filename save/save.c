@@ -3,7 +3,7 @@
 #include "save.h"
 
 int save_to_txt(Cell ***field , int width , int height){
-	FILE *out = fopen("result.txt" , "w");
+	FILE *out = fopen("./resources/result.txt" , "w");
 	if(out == NULL){
 		printf("Nie udalo sie utworzyc pliku z wynikami");
 		return 1;
@@ -23,7 +23,7 @@ int save_to_txt(Cell ***field , int width , int height){
 }
 
 int save_to_png(Cell ***field, int width , int height , int gen_number){
-	FILE *out = fopen("result.png_" , "w") ;
+	FILE *out = fopen("./resources/result.png" , "w") ;
 	if(out == NULL){
 		printf("Nie udalo sie utworzyc pliku wynikowego") ; 
 		return 1;

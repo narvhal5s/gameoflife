@@ -6,9 +6,10 @@
 #include <string.h>
 #include <time.h>
 
+//Podstawowa struktura jednej komorki
 typedef struct cell{
-	int state;
-	int neighbours;
+	int state; //Stan w jakim sie znajduje 1 - zywa lub 0 -martwa
+	int neighbours; //Liczba zywych sasiadow komorki zakres od 0 do 8 wlacznie
 } Cell;
 
 //Funkcja obslugujaca caly modul field 
@@ -25,10 +26,11 @@ Cell *** clear_field ( Cell ***field , int width , int height );
 //Funkcje wczytujaca dane na pole gry , odpowiednio z pliku tekstowego obraz png i losowe 
 Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_detail); 
 
-
+//Funkcja wczytuje dane z obrazu PNG
 Cell *** read_from_png ( Cell *** field , int width , int height , char *load_detail); 
 
-
+//Funkcja wypelnia stany komorek losowo z procentem okreslonym przez uzytkownika
+//Odczylenie od tej wartosci wynosi do 5%
 Cell *** fill_random ( Cell *** field , int width , int height , char *load_detail); 
 
 #endif
