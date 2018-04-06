@@ -90,7 +90,28 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 }
 
 Cell *** read_from_png ( Cell *** field , int width , int height , char *load_detail){
+	unsigned error;
+	unsigned char *image;
+	unsigned t_width = width , t_height = height ;
+	unsigned char *png ;
+	size_t png_size ;
+	error = lodepng_load_file ( &png , &png_size , load_detail ) ;
+	if(!error) 
+		error = lodepng_decode32( &image , &t_width , &t_height , png , png_size) ;
+	if(error)
+		printf("Error %u: %s\n" , error , lodepng_error_text(error) ) ;
 
+	free(png) ;
+	int k = 0 ; 
+	for(int i=0 ; i < width ; i++){
+		for(int j=0  ; j < height ; j++ , k=k+4 ){
+			if( image[k] == 0 && image[k+1] == 0 && image[k+2] == 0)
+				field[i][j]->state = 1 ;
+			else
+				field[i][j]->state = 0 ;
+		}
+	}
+	free(image) ;
 	return field;
 }
 

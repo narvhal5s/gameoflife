@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "../lodepng/lodepng.h"
 
 //Podstawowa struktura jednej komorki
 typedef struct cell{

@@ -1,12 +1,12 @@
 
 
 play_life: main.o field.o save.o game.o lodepng.o
-	@$(CC) main.o field.o save.o game.o  -o play_life
+	@$(CC) main.o field.o save.o game.o lodepng.o  -o play_life
 	@rm *.o
 main.o: main.c field/field.h game/game.h
 	@$(CC) main.c -c -Wall
 
-field.o: field/field.c field/field.h lodepng/lodepng.h
+field.o: field/field.c field/field.h lodepng/lodepng.h 
 	@$(CC) field/field.c -c -Wall
 
 save.o: save/save.c save/save.h field/field.h lodepng/lodepng.h
@@ -33,3 +33,11 @@ txttest: play_life
 memorytxttest: play_life
 	valgrind -v  ./play_life 5 6 150 txt matrix.txt  gif 23/3
 
+pngtest: play_life
+	./play_life 20 20 150 png resources/sample.png txt 23/3
+
+pngmemorytest: play_life
+	valgrind ./play_life 20 20 150 png resources/sample.png txt 23/3
+
+savetopng: play_life
+	valgrind ./play_life 100 100 150 random 44  png 23/3

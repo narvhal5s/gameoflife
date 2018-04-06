@@ -1,6 +1,6 @@
 
-all: field.o test.o
-	@$(CC)  field.o test.o -o a 
+all: field.o test.o lodepng.o
+	@$(CC)  field.o test.o lodepng.o -o a 
 	@rm *.o	
 	@./a
 field.o: field.c field.h
@@ -9,7 +9,8 @@ field.o: field.c field.h
 test.o: test_field.c field.h
 	@$(CC)  test_field.c -c -o test.o
 
-valgrind: field.o test.o  
-	@$(CC)  field.o test.o -o a 
-	@rm *.o	
-	@valgrind ./a
+lodepng.o: ../lodepng/lodepng.c ../lodepng/lodepng.h
+	@$(CC) ../lodepng/lodepng.c -c 
+
+valgrind: a
+	 valgrind  ./a 
