@@ -1,20 +1,22 @@
 
 
-play_life: main.o field.o save.o game.o
+play_life: main.o field.o save.o game.o lodepng.o
 	@$(CC) main.o field.o save.o game.o  -o play_life
 	@rm *.o
 main.o: main.c field/field.h game/game.h
 	@$(CC) main.c -c -Wall
 
-field.o: field/field.c field/field.h 
+field.o: field/field.c field/field.h lodepng/lodepng.h
 	@$(CC) field/field.c -c -Wall
 
-save.o: save/save.c save/save.h field/field.h
+save.o: save/save.c save/save.h field/field.h lodepng/lodepng.h
 	@$(CC) save/save.c -c  -Wall 
 
 game.o: game/game.c game/game.h save/save.h field/field.h
 	@$(CC) game/game.c -c -Wall
 
+lodepng.o: lodepng/lodepng.c lodepng/lodepng.h
+	@$(CC) lodepng/lodepng.c -c -Wall
 
 commandtest: play_life
 	./play_life 50 50 150 random 100 gif 13/5

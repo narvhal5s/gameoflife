@@ -1,7 +1,6 @@
 
 #include "field.h"
 
-
 Cell *** field_control( int width , int height , char *load_type , char *load_detail ){
 
 	//Inicjalizacja pola gry 	
@@ -37,7 +36,9 @@ Cell *** make_field( int width , int height ){
 	for(int i=0 ; i< width ; i++)
 		for(int j=0 ; j< height ; j++)
 			field[i][j] = (Cell*)malloc(sizeof(Cell));
-			
+	
+	//Pamiec jest rowniez zerowana
+
 	for(int i=0 ; i < width ; i++){
 		for(int j=0 ; j < height ; j++){
 				field[i][j]->state = 0 ;

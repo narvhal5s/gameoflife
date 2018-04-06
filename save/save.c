@@ -3,22 +3,18 @@
 #include "save.h"
 
 int save_to_txt(Cell ***field , int width , int height){
-	FILE *out = fopen("./resources/result.txt" , "w");
+	FILE *out = fopen("result.txt" , "wa");
 	if(out == NULL){
 		printf("Nie udalo sie utworzyc pliku z wynikami");
 		return 1;
 	}
-	int tmp = 0 ;
 	for(int i = 0 ; i < width ; i++){
 		for(int j = 0 ; j < height ; j++){
 			fprintf(out , "%d " , field[i][j]->state);
-			if(field[i][j]->state == 1 )
-				tmp++;
 		}
 		fprintf(out , "\n");
 	}
 	fclose(out);
-	printf("%d\n\n " ,  tmp ) ;
 	return 0;
 }
 

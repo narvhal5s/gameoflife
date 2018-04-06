@@ -84,14 +84,15 @@ int main( int argc, char **argv){
 		gen_counter = 200 ; 
 	}	
 	if(strcmp(load_type , "png") == 0 || strcmp(load_type , "txt") == 0 ){
-		FILE *input = NULL;
-		input = fopen(load_detail , "r");
+		FILE *input = fopen( load_detail , "r");
 		if( input == NULL){
 			printf("Nie udalo sie otworzyc pliku %s, uzyty zostanie losowe wypelnienie planszy\n" , load_detail ) ;
 			 load_type = "random" ;
 			 load_detail = "25" ; 
 		}
-		fclose(input);
+		else{
+			fclose(input);
+		}
 	}
 	else if( strcmp(load_type , "random") == 0 && atoi(load_detail) <=100 && atoi(load_detail) >= 0 ){
 		printf("Wczytano random genracji %s\n" , load_detail);
@@ -148,7 +149,8 @@ int main( int argc, char **argv){
 	
 	//Wywolanie modulu field
 	Cell ***field = field_control( width , height , load_type , load_detail );
-	
+
+	//Wywolanie modulu game 	
 	play_game( field , width , height  , live , live_counter , born , born_counter , save_to , gen_counter);	
 
 	//Finalizacja programu , sprzatanie
