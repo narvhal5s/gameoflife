@@ -90,11 +90,15 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 }
 
 Cell *** read_from_png ( Cell *** field , int width , int height , char *load_detail){
+	
+	//Deklaracja zmiennych potrzebnych modulowi lodepng
 	unsigned error;
 	unsigned char *image;
 	unsigned t_width = width , t_height = height ;
 	unsigned char *png ;
 	size_t png_size ;
+	
+	//Dwufazowe wczytywanie obrazu PNG
 	error = lodepng_load_file ( &png , &png_size , load_detail ) ;
 	if(!error) 
 		error = lodepng_decode32( &image , &t_width , &t_height , png , png_size) ;
@@ -102,15 +106,25 @@ Cell *** read_from_png ( Cell *** field , int width , int height , char *load_de
 		printf("Error %u: %s\n" , error , lodepng_error_text(error) ) ;
 
 	free(png) ;
+	
+	//Wynikiem tego jest tablica image ktora zawiera wartosci R G B A dla kolejnych bitow
+	
 	int k = 0 ; 
+	
+	//Petla przepisuje tablice image na strukture CELL
 	for(int i=0 ; i < width ; i++){
 		for(int j=0  ; j < height ; j++ , k=k+4 ){
+			
+			//Kazdy czarny pixel zostanie potraktowany jako zywa komorka 
 			if( image[k] == 0 && image[k+1] == 0 && image[k+2] == 0)
 				field[i][j]->state = 1 ;
+			
+			//Pozostale kolory sa traktowane jako martwa
 			else
 				field[i][j]->state = 0 ;
 		}
 	}
+
 	free(image) ;
 	return field;
 }
@@ -126,7 +140,7 @@ Cell *** fill_random ( Cell *** field , int width , int height , char *load_deta
 	int percent = atoi(load_detail);
 	
 	//Generacji losowa, odchylenie w zaleznosci od wielkosci pola gry 
-	//Mimo nie najwiekszej precyzji dziala sprawnie i jest prost 	
+	//Mimo nie najwiekszej precyzji dziala sprawnie i jest prosta 	
 	
 	for(int i=0 ; i < width ; i++){
 		for(int j=0 ; j < height ; j++){

@@ -11,9 +11,9 @@
 int save_to_txt( Cell ***field , int width , int height );
 
 //Zapis do obrazu PNG w przypadku generacji gif zostaje jeden obraz z ktorego mozna kontynuowac generacje
-int save_to_png( Cell ***field , int width , int height , int gen_number );
+int save_to_png( Cell ***field , int width , int height , int gen_number , unsigned char *image );
 
 //Generuje pliku gif zajmuje sie rownierz wyczyszczeniem plikow PNG
-int make_gif(int gen_counter); //Liczba generacji jest potrzebna bo tyle bedzie PNG
+int make_gif();
 
 #endif

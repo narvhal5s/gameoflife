@@ -37,7 +37,7 @@ pngtest: play_life
 	./play_life 20 20 150 png resources/sample.png gif 23/3
 
 pngmemorytest: play_life
-	valgrind ./play_life 100 100 150 random 30 gif 23/3
+	valgrind ./play_life 100 100 50 random 30 gif 23/3
 
 savetopng: play_life
 	valgrind ./play_life 100 100 150 random 44  png 23/3
