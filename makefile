@@ -25,7 +25,7 @@ commandtesterror: play_life
 	./play_life 500 699 0 txt lak.png gidA 9a/1
 
 memorytest: play_life
-	valgrind -v ./play_life 100 100 150 random 44  gif 13/5
+	valgrind -v ./play_life 100 100 150 random 44  txt 13/5
 
 txttest: play_life
 	./play_life 5 6 150 txt resources/matrix.txt  gif 23/3
@@ -34,10 +34,10 @@ memorytxttest: play_life
 	valgrind -v  ./play_life 5 6 150 txt matrix.txt  gif 23/3
 
 pngtest: play_life
-	./play_life 20 20 150 png resources/sample.png txt 23/3
+	./play_life 20 20 150 png resources/sample.png gif 23/3
 
 pngmemorytest: play_life
-	valgrind ./play_life 20 20 150 png resources/sample.png txt 23/3
+	valgrind ./play_life 100 100 150 random 30 gif 23/3
 
 savetopng: play_life
 	valgrind ./play_life 100 100 150 random 44  png 23/3

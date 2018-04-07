@@ -11,6 +11,6 @@ int play_game( Cell ***field , int width , int height , int *live , int live_cou
 Cell *** count_neighbours( Cell ***field , int width , int height ) ; 
 
 //Funkcja zmienia stan komorki w zaleznosci od liczby sasiadow
-Cell *** change_state(Cell ***field , int width , int height , int *live , int live_counter , int *born , int born_counter);
+Cell *** change_state(Cell ***field , int width , int height , int *live , int live_counter , int *born , int born_counter , int *change_checker);
 
 #endif 

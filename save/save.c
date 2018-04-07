@@ -18,9 +18,10 @@ int save_to_txt(Cell ***field , int width , int height){
 	return 0;
 }
 
-int save_to_png(Cell ***field, int width , int height , int gen_number){
+int save_to_png(Cell ***field, int width , int height , int gen_number ){
 	
 	unsigned char *image = malloc(width * height * 4 * sizeof(char)) ;
+	
 	int k = 0 ; 
 	for( int i = 0 ; i < width ; i++ ){
 		for( int j = 0 ; j < height ; j++ , k=k+4  ){
@@ -37,8 +38,9 @@ int save_to_png(Cell ***field, int width , int height , int gen_number){
 			image[k+3] = 255 ; 
 		}
 	}
-
-	unsigned error = lodepng_encode32_file( "resulte.png" , image , width, height );
+	char filename[20] ; 
+	snprintf( filename , 20 , "image%03d.png" , gen_number ) ;
+	unsigned error = lodepng_encode32_file( filename , image , width, height );
 
 	if(error) 
 		printf("error %u: %s\n", error, lodepng_error_text(error));
@@ -49,7 +51,8 @@ int save_to_png(Cell ***field, int width , int height , int gen_number){
 
 int make_gif( int gen_counter ) {
 
-
+	system( "convert -delay 25 -loop 0 *.png mygif.gif" ) ;
+	system( "rm *.png" ) ; 
 
 
 	return 0 ; 
