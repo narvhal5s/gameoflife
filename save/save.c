@@ -46,3 +46,11 @@ int save_to_png(Cell ***field, int width , int height , int gen_number){
 	free(image);	
 	return 0 ;
 }
+
+int make_gif( int gen_counter ) {
+
+
+
+
+	return 0 ; 
+}

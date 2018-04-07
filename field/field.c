@@ -58,7 +58,7 @@ Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_de
 	
 	//Zmienne potrzebne do wczytywania
 	
-	char c ;
+	char c = 0  ;
 	int i = 0 , j = 0 ;
 	
 	//Petla while wczytuje az do konca pliku 

@@ -3,16 +3,27 @@
 
 int play_game( Cell ***field , int width , int height , int *live ,int live_counter , int *born , int born_counter ,char *save_to , int gen_counter){
 
+	for( int i = 0 ; i < gen_counter ; i ++ ){
+	
+		field = count_neighbours( field , width, height ) ;
+		field = change_state ( field ,  width , height , live , live_counter , born , born_counter) ;
+		if( strcmp ( save_to ,  "gif" ) == 0 ){
+			save_to_png( field , width , height , i ) ;
+		}
+	}
+	
 
-//	field = count_neighbours( field , width, height ) ;
+	if( strcmp( save_to , "png" ) == 0 ) {
+		save_to_png( field , width , height , gen_counter ) ;	
+	}
 
+	if( strcmp( save_to , "txt" ) == 0 ) {
+		save_to_txt( field , width , height );
+	}
 
-//	field = change_state ( field ,  width , height , live , live_counter , born , born_counter) ;
-
-
-	save_to_png( field , width , height , gen_counter ) ;	
-
-
+	if( strcmp ( save_to ,  "gif" ) == 0 ){
+		make_gif( gen_counter ) ; 	
+	}
 	return 0;
 }
 
