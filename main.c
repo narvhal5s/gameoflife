@@ -71,11 +71,11 @@ int main( int argc, char **argv){
 
 	//Sprawdzenie poprawnosci argumentow
 
-	if(width > 100 || width < 1){
+	if(width > 300 || width < 1){
 		printf("Argument width wykracza poza prawidlowy przedzial\nWczytano wartosc domyslna\n");
 		width = 50 ; 
 	}	
-	if(height > 100 || height < 1){
+	if(height > 300 || height < 1){
 		printf("Argument height wykracza poza prawidlowy przedzial\nWczytano wartosc domyslna\n");
 		height = 50 ; 
 	}	
@@ -116,7 +116,7 @@ int main( int argc, char **argv){
 
 	int i ;
 	for( i = 0 ; i < strlen(rules) ; i++ ){
-		if( (rules[i] < '1' ||  rules[i] > '8')  && rules[i] != '/' ){
+		if( (rules[i] < '0' ||  rules[i] > '8')  && rules[i] != '/' ){
 			printf("Argument rules jest nieprawidlowy ");
 			rules_check = 1 ;
 			break;

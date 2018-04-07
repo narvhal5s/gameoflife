@@ -59,7 +59,7 @@ int save_to_png(Cell ***field, int width , int height , int gen_number , unsigne
 
 int make_gif() {
 
-	system( "convert -delay 25 -loop 0 *.png mygif.gif" ) ;
+	system( "convert -delay 15 -loop 0 *.png mygif.gif" ) ;
 	system( "rm *.png" ) ; 
 
 

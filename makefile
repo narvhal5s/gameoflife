@@ -30,6 +30,9 @@ memorytest: play_life
 txttest: play_life
 	./play_life 5 6 150 txt resources/matrix.txt  gif 23/3
 
+txtsample: play_life
+	./play_life 50 50 1 random 60 txt 23/3
+
 memorytxttest: play_life
 	valgrind -v  ./play_life 5 6 150 txt matrix.txt  gif 23/3
 
@@ -41,3 +44,24 @@ pngmemorytest: play_life
 
 savetopng: play_life
 	valgrind ./play_life 100 100 150 random 44  png 23/3
+
+glider: play_life
+	./play_life 50 50 250 txt resources/glider.txt gif 23/3
+
+chaos: play_life
+	./play_life 50 50 250 txt resources/glider.txt gif 1/1
+
+labirynty:
+	./play_life 100 100 200 random 10 gif 12345/3
+
+statki_1:
+	./play_life 100 100 200 random 10 gif 234/3
+
+miasto:
+	./play_life 200 200 100 random 40 gif 2345/45678
+
+conwaybig:
+	./play_life 250 250 300 random 30 gif 23/3
+
+ameba:
+	./play_life 250 250 300 txt ./resources/probka.txt gif 1/1
