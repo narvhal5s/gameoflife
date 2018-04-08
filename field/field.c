@@ -7,7 +7,7 @@ Cell *** field_control( int width , int height , char *load_type , char *load_de
 	
 	Cell ***field = make_field( width , height );
 
-	//W zaleznosci od parametru load_type wywolane zostana rozne funkcje
+	//W zaleznosci od parametru load_type wywolane zostana rozne funkcje do wypelniania pola gry
 	
 	if(strcmp(load_type , "txt") == 0)
 		field = read_from_txt( field , width , height , load_detail);
@@ -37,8 +37,8 @@ Cell *** make_field( int width , int height ){
 		for(int j=0 ; j< height ; j++)
 			field[i][j] = (Cell*)malloc(sizeof(Cell));
 	
-	//Pamiec jest rowniez zerowana
-
+	//Wartosci poszczegolnych komorek sa zerowane
+	
 	for(int i=0 ; i < width ; i++){
 		for(int j=0 ; j < height ; j++){
 				field[i][j]->state = 0 ;

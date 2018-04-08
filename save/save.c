@@ -6,7 +6,7 @@
 int save_to_txt(Cell ***field , int width , int height){
 	
 	//Utworzenie pliku wynikowego 
-	FILE *out = fopen("result.txt" , "wa");
+	FILE *out = fopen("for_continue.txt" , "wa");
 	if(out == NULL){
 		printf("Nie udalo sie utworzyc pliku z wynikami");
 		return 1;
@@ -28,7 +28,7 @@ int save_to_png(Cell ***field, int width , int height , int gen_number , unsigne
 	//Pomocnicza zmienna iteracyjna, przeskakuje ona do kolejncyh czterech wartosci RGBA 	
 	int k = 0 ; 
 
-	//Petla przechodzi po tablicy, zywe komorki beda czarne , martwe biale
+	//Petla przechodzi po tablicy, zywe komorki beda rozowe , martwe czarne
 	for( int i = 0 ; i < width ; i++ ){
 		for( int j = 0 ; j < height ; j++ , k=k+4  ){
 			if( field[i][j]->state == 1 ){

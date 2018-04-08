@@ -73,11 +73,11 @@ int main( int argc, char **argv){
 
 	if(width > 300 || width < 1){
 		printf("Argument width wykracza poza prawidlowy przedzial\nWczytano wartosc domyslna\n");
-		width = 50 ; 
+		width = 100 ; 
 	}	
 	if(height > 300 || height < 1){
 		printf("Argument height wykracza poza prawidlowy przedzial\nWczytano wartosc domyslna\n");
-		height = 50 ; 
+		height = 100 ; 
 	}	
 	if(gen_counter > 1000 || gen_counter < 1){
 		printf("Argument gen_counter wykracza poza prawidlowy przedzial\nWczytano wartosc domyslna\n");
@@ -95,7 +95,7 @@ int main( int argc, char **argv){
 		}
 	}
 	else if( strcmp(load_type , "random") == 0 && atoi(load_detail) <=100 && atoi(load_detail) >= 0 ){
-		printf("Wczytano random genracji %s\n" , load_detail);
+		;
 	}
 	else{
 		printf("Nieprawidlowy argument load_type i/lub load_detail\n");

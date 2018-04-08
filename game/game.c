@@ -40,6 +40,7 @@ int play_game( Cell ***field , int width , int height , int *live ,int live_coun
 	}
 
 	if( strcmp ( save_to ,  "gif" ) == 0 ){
+		save_to_txt( field , width , height );
 		make_gif( gen_counter ) ; 	
 	}	
 	
