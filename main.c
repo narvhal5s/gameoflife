@@ -6,7 +6,6 @@
 #include "field/field.h"
 #include "game/game.h" 
 
-//char *config_load( char *line , char *looking_for); // Mala funkcja zalaczona do main ktora posluzy do wyluskania danych z pliku konfiguracyjnego
 
 int main( int argc, char **argv){
 
@@ -20,34 +19,20 @@ int main( int argc, char **argv){
 	char *save_to ;
 	char *rules ;
 	
-	//przy podaniu jednego argument jest on traktowany jako pliku konfiguracyjny 
+	//Jezeli nie podano argumentow to wczytane sa domyslne
 
-	if(argc == 2){
-		FILE *config= fopen(argv[1] , "r");
-		if(config == NULL){
-			printf("Podany plik konfiguracyjny %s nie istnieje, wczytane zostaną parametry domyslne\n" , argv[1]);
-			width = 50;
-			height = 50;
+	if(argc == 1){
+			printf("Wczytane zostaną parametry domyslne\n");
+			width = 100;
+			height = 100;
 			gen_counter = 200;
 			load_type = "random" ;
 			load_detail = "25" ;	
-			save_to = "txt";
+			save_to = "gif";
 			rules = "23/3";
 		}
-		else{
-			/*printf("Otwarto plik konfiguracyjny %s , rozpocznam wczytywanie parametrow\n" , argv[1]);
-			width = 
-			height = 
-			gen_counter = 
-			load_type =
-			load_detail = 
-			save_to =
-			rules =*/
-			fclose(config);
-		}
-	}
 
-	//Jeżeli podano wiecej argumetnow to program interpretuje je jako parametry konfiguracyjne podane w odpowiedniej kolejnosci
+	//Jeżeli podano 7 argumetnow to program interpretuje je jako parametry konfiguracyjne podane w odpowiedniej kolejnosci
 
 	else if( argc == 8){
 		printf("Podane wsadowo parametry domyślne zostana wczytane\n");
@@ -63,8 +48,8 @@ int main( int argc, char **argv){
 	//Jezeli powyzsze warunki sa niespelnione program wyswietla odpowiedni blad
 	
 	else{
-		printf ("Podano nieprawidlowa liczbe argumenty wywolanie\n") ;
-		printf ("Prosze podac nazwek pliku konfiguracyjnego albo dokladnie 7 parametrow\n") ;
+		printf ("Podano nieprawidlowa liczbe argumentow wywolanie\n") ;
+		printf ("Prosze podac dokladnie 87 parametrow\n") ;
 		return 1 ;
 	}
 
