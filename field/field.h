@@ -13,6 +13,13 @@ typedef struct cell{
 	int neighbours; //Liczba zywych sasiadow komorki zakres od 0 do 8 wlacznie
 } Cell;
 
+typedef struct rules{
+	int *born ;
+	int born_counter ;
+	int *live ;
+	int live_counter ;
+} Rules ; 
+
 //Funkcja obslugujaca caly modul field 
 Cell *** field_control( int width , int height , char *load_type , char *load_detail );
 
@@ -20,9 +27,8 @@ Cell *** field_control( int width , int height , char *load_type , char *load_de
 //Pole gry to dwuwymiarowa tablica wzkaznikow na strukture
 Cell *** make_field(int width , int height );
 
-//Funkcja zwalnia pamiec zaalokowana na stworzenie pola 
-//Wzkaznik ***field zwroci NULL jesli wszystko zostanie prawidlowo zwolnione
-Cell *** clear_field ( Cell ***field , int width , int height );
+//Funkcja zwalnia pamiec zaalokowana na stworzenie pola i struktury rules 
+int clear_memory( Cell ***field , int width , int height ,Rules rules );
 
 //Funkcje wczytujaca dane na pole gry , odpowiednio z pliku tekstowego obraz png i losowe 
 Cell *** read_from_txt ( Cell *** field , int width , int height , char *load_detail); 
@@ -34,4 +40,8 @@ Cell *** read_from_png ( Cell *** field , int width , int height , char *load_de
 //Odczylenie od tej wartosci wynosi do 5%
 Cell *** fill_random ( Cell *** field , int width , int height , char *load_detail); 
 
+//Wczyta zaladowane przy uruchomieniu zasady do struktury Rules 
+Rules  read_rules( char *loaded_rules , Rules rules ) ;
+
 #endif
+

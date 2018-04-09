@@ -2,7 +2,7 @@
  
 #include "game.h"
 
-int play_game( Cell ***field , int width , int height , int *live ,int live_counter , int *born , int born_counter ,char *save_to , int gen_counter){
+int play_game( Cell ***field , int width , int height , Rules rules ,char *save_to , int gen_counter){
 	
 	//Deklaracja zmienne ktora sprwadza czy zachodza zmiany przy generacji
 	int change_checker = 1 ;
@@ -17,7 +17,7 @@ int play_game( Cell ***field , int width , int height , int *live ,int live_coun
 		field = count_neighbours( field , width, height ) ;
 
 		//Zmiana stanow poszczegolnych komorek
-		field = change_state ( field ,  width , height , live , live_counter , born , born_counter , &change_checker ) ;
+		field = change_state ( field ,  width , height , rules , &change_checker ) ;
 		//Jezeli zadanym wynikiem jest plik gif zapisywany jest obraz z kazdej generacji 
 		if( strcmp ( save_to ,  "gif" ) == 0 ){
 			save_to_png( field , width , height , i  , image ) ;
@@ -102,7 +102,7 @@ Cell *** count_neighbours( Cell ***field , int width , int height ){
 } 
 
 
-Cell *** change_state(Cell ***field , int width , int height , int *live , int live_counter , int *born , int born_counter , int *change_checker ){
+Cell *** change_state(Cell ***field , int width , int height , Rules rules , int *change_checker ){
 	
 	//Ustawienie zmiennej mowiacej o tym czy zachodza zmianny jezeli nie zajde to wlasnie bedzie zwrocona wartosc
 	*change_checker = 1 ;
@@ -118,8 +118,8 @@ Cell *** change_state(Cell ***field , int width , int height , int *live , int l
 			if(field[i][j]->state == 0){
 				
 				//Wykorzystana jest tablica zawierajaca liczbe sasiadow dla ktorych komorka sie rodzi 
-				for(int b = 0 ; b < born_counter ; b ++){
-					if(born[b] == field[i][j]->neighbours){
+				for(int b = 0 ; b < rules.born_counter ; b ++){
+					if(rules.born[b] == field[i][j]->neighbours){
 						field[i][j]->state = 1 ; //Komorka sie rodzi
 						*change_checker = 0 ;
 					}
@@ -132,8 +132,8 @@ Cell *** change_state(Cell ***field , int width , int height , int *live , int l
 				die = 1;
 		
 				//Wykorzystana jest tablica zawieajaca liczbe sasidaow dla ktorych komorka pozostaje zywa
-				for(int l = 0 ; l < live_counter ; l ++){
-					if(live[l] == field[i][j]->neighbours)
+				for(int l = 0 ; l < rules.live_counter ; l ++){
+					if(rules.live[l] == field[i][j]->neighbours)
 						die = 0 ;
 					
 				}

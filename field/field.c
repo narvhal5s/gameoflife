@@ -155,7 +155,7 @@ Cell *** fill_random ( Cell *** field , int width , int height , char *load_deta
 }
 
 
-Cell *** clear_field(Cell ***field , int width , int height){
+int clear_memory(Cell ***field , int width , int height , Rules rules ){
 	
 	//Zwolnienie pamieci w kolejnosci odwrotnej do rezerwowania
 
@@ -166,9 +166,40 @@ Cell *** clear_field(Cell ***field , int width , int height){
 	for(int i=0 ; i< width ; i++)
 		free(field[i]) ;
 
+	free( rules.live ) ;
+	free( rules.born ) ;
+
 	free(field) ;
 
-	field = NULL ; 
-
-	return field ;
+	return 0 ;
 } 
+	
+Rules read_rules( char *loaded_rules , Rules rules ){
+	
+	
+	//Dane loaded_rules zostana wczytane do dwoch tablic lokowanych dynamicznych 
+	//W tym celu obliczono ilosc sasidow dla ktorych komorka przezywa live_counter i born_counter dla ilu sie rodzi
+	// live zawiera liczbe sasiadow dla ktorej komorka zostaje zywa
+	// born zawiera liczbe sasiadow dla ktorej komorka rodzi sie
+	
+	int i , j ;
+	
+	rules.live_counter = 0 ; 	
+	rules.born_counter = 0 ;
+	
+	for( i = 0 ; loaded_rules[i] != '/' ; i++)
+		rules.live_counter++;
+	
+	rules.live = (int*)malloc( rules.live_counter * sizeof(int)) ;
+	rules.born_counter = strlen(loaded_rules) - rules.live_counter -1 ;
+	rules.born = (int*)malloc( rules.born_counter * sizeof(int)) ; 
+	
+	for( i = 0; loaded_rules[i] != '/' ; i++ )
+		rules.live[i] = loaded_rules[i] - '0';
+
+	for( i++ , j=0 ; i<strlen(loaded_rules) ; i++ , j++)
+		rules.born[j] = loaded_rules[i] - '0';	
+	
+	return rules ; 
+
+}

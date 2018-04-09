@@ -17,7 +17,7 @@ int main( int argc, char **argv){
 	char *load_type ;
 	char *load_detail ;
 	char *save_to ;
-	char *rules ;
+	char *loaded_rules ;
 	
 	//Jezeli nie podano argumentow to wczytane sa domyslne
 
@@ -29,7 +29,7 @@ int main( int argc, char **argv){
 			load_type = "random" ;
 			load_detail = "25" ;	
 			save_to = "gif";
-			rules = "23/3";
+			loaded_rules = "23/3";
 		}
 
 	//Jeżeli podano 7 argumetnow to program interpretuje je jako parametry konfiguracyjne podane w odpowiedniej kolejnosci
@@ -42,7 +42,7 @@ int main( int argc, char **argv){
 		load_type = argv[4] ;
 		load_detail = argv[5] ;
 		save_to = argv[6] ;
-		rules = argv[7] ; 
+		loaded_rules = argv[7] ; 
 	}
 
 	//Jezeli powyzsze warunki sa niespelnione program wyswietla odpowiedni blad
@@ -91,17 +91,12 @@ int main( int argc, char **argv){
 	}
 	
 	// Ponizej weryfikacja poprawnosci parametru rules
-	// Nastepuje rowniez przepisanie go na dwie tablice live i born
-	// live zawiera liczbe sasiadow dla ktorej komorka zostaje zywa
-	// born zawiera liczbe sasiadow dla ktorej komorka rodzi sie
-	// Te dwie tablice zostana przekazane do modulu GAME zamiast lancucha rules, co stanowi zmiane wzgledem specyfikacji implementacyjnej
 	
 	int rules_check = 0 ;
-	int live_counter = 0 ;
 
 	int i ;
-	for( i = 0 ; i < strlen(rules) ; i++ ){
-		if( (rules[i] < '0' ||  rules[i] > '8')  && rules[i] != '/' ){
+	for( i = 0 ; i < strlen(loaded_rules) ; i++ ){
+		if( (loaded_rules[i] < '0' ||  loaded_rules[i] > '8')  && loaded_rules[i] != '/' ){
 			printf("Argument rules jest nieprawidlowy ");
 			rules_check = 1 ;
 			break;
@@ -112,36 +107,29 @@ int main( int argc, char **argv){
 
 	if(rules_check == 1){
 		printf("Wczytano wartosc domyslna (23/3)\n");
-		rules = "23/3";
+		loaded_rules = "23/3";
 	}
 	
-	//Dane rules zostana wczytane do dwoch tablic lokowanych dynamicznych 
-	//W tym celu obliczono ilosc sasidow dla ktorych komorka przezywa live_counter i born_counter dla ilu sie rodzi
-
-	for( i = 0 ; rules[i] != '/' ; i++)
-		live_counter++;
+	//Stworzenie struktury rules oraz wczytanie jej wartosci 	
+	Rules rules ;
+	rules = read_rules( loaded_rules , rules ) ;
 	
-	int *live = (int*)malloc( live_counter * sizeof(int)) ;
-	int born_counter = strlen(rules) - live_counter -1 ;
-	int *born = (int*)malloc( born_counter * sizeof(int)) ; 
-	
-	for( i = 0; rules[i] != '/' ; i++ )
-		live[i] = rules[i] - '0';
-
-	int j;	
-	for( i++ , j=0 ; i<strlen(rules) ; i++ , j++)
-		born[j] = rules[i] - '0';	
+	int error_chec = 0 ; 
 	
 	//Wywolanie modulu field
 	Cell ***field = field_control( width , height , load_type , load_detail );
 
 	//Wywolanie modulu game 	
-	play_game( field , width , height  , live , live_counter , born , born_counter , save_to , gen_counter);	
-
+	error_chec = play_game( field , width , height  , rules , save_to , gen_counter);	
+	if( error_chec != 0 )
+		printf("Podczas symulacji gry wystapil blad\n" )  ;
+	
 	//Finalizacja programu , sprzatanie
-	field = clear_field( field , width , height ) ;
-	free(live);
-	free(born);
+	error_chec = clear_memory( field , width , height , rules ) ;
+	if( error_chec != 0 )
+		printf("Wystapil blad przy zwalnianiu pamiec\n") ;
+
+
 	return 0;
 
 }
