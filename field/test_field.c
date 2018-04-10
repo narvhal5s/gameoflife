@@ -6,8 +6,8 @@
 
 //Zmienne uzywane do tesow w module field Obok podano jakie wartosci moga one przyjac 
 
-#define WIDTH 40  //Zakres od 1 do 100
-#define HEIGHT 40 //Zakres od 1 do 100
+#define WIDTH 20  //Zakres od 1 do 100
+#define HEIGHT 20 //Zakres od 1 do 100
 #define LOAD_TYPE "random" // random lub txt lub png
 #define LOAD_DETAIL "50" //Dla random zakres od 0-100 dla txt i png sciezka do pliku 
 
@@ -42,7 +42,6 @@ int main( int argc , char *argv ){
 
 
 	//Czyszczenie pamieci
-	field = clear_field( field , WIDTH , HEIGHT ) ; 
 
 	if(field == NULL){
 		printf("Czyszczenie pamieci zakonczone\n");

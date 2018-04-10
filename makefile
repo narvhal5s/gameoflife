@@ -24,7 +24,7 @@ commandtesterror: play_life
 	./play_life 500 699 0 txt lak.png gidA 9a/1
 
 memorytest: play_life
-	valgrind -v ./play_life 100 100 150 random 44  txt 13/5
+	valgrind -v ./play_life 100 100 150 random 44  txt 23/3
 
 txttest: play_life
 	./play_life 5 6 150 txt resources/matrix.txt  gif 23/3
@@ -39,7 +39,7 @@ giftest: play_life
 	./play_life 100 100 400 random 25 gif 23/3
 
 pngmemorytest: play_life
-	valgrind ./play_life 100 100 50 random 30 gif 23/3
+	valgrind ./play_life 100 100 150 random 30 gif 23/3
 
 
 
@@ -50,10 +50,10 @@ chaos: play_life
 	./play_life 50 50 250 txt resources/glider.txt gif 1/1
 
 labirynty:
-	./play_life 100 100 200 random 10 gif 12345/3
+	./play_life 100 100 200 random 5 gif 12345/3
 
 statki_1:
-	./play_life 100 100 200 random 10 gif 234/3
+	./play_life 100 100 200 random 20 gif 234/3
 
 miasto:
 	./play_life 300 300 200 random 45 gif 2345/45678

@@ -7,9 +7,6 @@ int play_game( Cell ***field , int width , int height , Rules rules ,char *save_
 	//Deklaracja zmienne ktora sprwadza czy zachodza zmiany przy generacji
 	int change_checker = 1 ;
 
-	//Deklaracja tablicy wykorzystywanej do zapisu obrazu 
-	unsigned char *image = malloc(width * height * 4 * sizeof(char) ) ;
-
 	//Petla wywolujaca kolejne generacje
 	for( int i = 0 ; i < gen_counter ; i ++ ){
 
@@ -20,7 +17,7 @@ int play_game( Cell ***field , int width , int height , Rules rules ,char *save_
 		field = change_state ( field ,  width , height , rules , &change_checker ) ;
 		//Jezeli zadanym wynikiem jest plik gif zapisywany jest obraz z kazdej generacji 
 		if( strcmp ( save_to ,  "gif" ) == 0 ){
-			save_to_png( field , width , height , i  , image ) ;
+			save_to_png( field , width , height , i ) ;
 		}
 		
 		//Jezeli zmienna jest prawdziwa to znaczy ze na planszy nie zachodza zmiany 
@@ -32,7 +29,7 @@ int play_game( Cell ***field , int width , int height , Rules rules ,char *save_
 	//Zapis koncowej generacji w zadanym formacie 
 
 	if( strcmp( save_to , "png" ) == 0 ) {
-		save_to_png( field , width , height , gen_counter , image  ) ;	
+		save_to_png( field , width , height , gen_counter ) ;	
 	}
 
 	if( strcmp( save_to , "txt" ) == 0 ) {
@@ -44,8 +41,6 @@ int play_game( Cell ***field , int width , int height , Rules rules ,char *save_
 		make_gif( gen_counter ) ; 	
 	}	
 	
-	//Zwolnienie pamieci po tablicy pomocnicznej zapisu do PNG
-	free(image) ;
 	
 	return 0;
 }
