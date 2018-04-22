@@ -112,7 +112,6 @@ Cell *** change_state(Cell ***field , int width , int height , Rules rules , int
 			//Jezeli komorka jest martwa sprawdza czy ma liczbe sasiadow potrzbna zeby sie ozywic
 			if(field[i][j]->state == 0){
 				
-				//Wykorzystana jest tablica zawierajaca liczbe sasiadow dla ktorych komorka sie rodzi 
 				for(int b = 0 ; b < rules.born_counter ; b ++){
 					if(rules.born[b] == field[i][j]->neighbours){
 						field[i][j]->state = 1 ; //Komorka sie rodzi
